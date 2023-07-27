@@ -1,21 +1,34 @@
-import React from 'react'
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import 'minireset.css'
-import './App.css'
-import Screens from '../screens'
-import Pokedex from './Pokedex'
+import 'nes.css/css/nes.min.css'
+import './app.css'
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000',
-  cache: new InMemoryCache(),
-})
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Pokedex from '../pokedex'
+import Home from '../screens/home'
+import Pokemon from '../screens/pokemon'
+import PokemonID from '../screens/pokemon/id'
 
-const App: React.FC = () => {
-  return (
-    <ApolloProvider client={client}>
-      <Pokedex>{clickLink => <Screens clickLink={clickLink} />}</Pokedex>
-    </ApolloProvider>
-  )
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Pokedex />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/pokemon',
+        element: <Pokemon />,
+      },
+      {
+        path: '/pokemon/:id',
+        element: <PokemonID />,
+      },
+    ],
+  },
+])
+
+export default function App() {
+  return <RouterProvider router={router} />
 }
-
-export default App

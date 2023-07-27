@@ -1,7 +1,8 @@
-import { ApolloServer, gql, IResolvers } from 'apollo-server'
-import sortBy from 'lodash/sortBy'
+import cors from 'cors'
+import express from 'express'
 import find from 'lodash/find'
-import pokemon from './pokemon.json'
+import sortBy from 'lodash/sortBy'
+import pokemonObj from './pokemon.json'
 
 interface Pokemon {
   id: string
@@ -19,67 +20,33 @@ interface Pokemon {
   candyCount?: number
 }
 
-const typeDefs = gql`
-  type Pokemon {
-    id: ID!
-    num: ID!
-    name: String!
-    img: String!
-    types: [String!]!
-    weaknesses: [String!]!
-    height: String!
-    weight: String!
-    egg: String!
-    prevEvolutions: [Pokemon!]!
-    nextEvolutions: [Pokemon!]!
-    candy: String
-    candyCount: Int
-  }
+const pokemon: Record<string, Pokemon> = pokemonObj
 
-  type Query {
-    pokemonMany(skip: Int, limit: Int): [Pokemon!]!
-    pokemonOne(id: ID!): Pokemon
-  }
-`
+const app = express()
+app.use(cors({ origin: 'http://localhost:5173' }))
 
-const resolvers: IResolvers<any, any> = {
-  Pokemon: {
-    prevEvolutions(rawPokemon: Pokemon) {
-      return (
-        rawPokemon.prevEvolutions?.map(evolution =>
-          find(pokemon, otherPokemon => otherPokemon.num === evolution.num)
-        ) || []
-      )
-    },
-    nextEvolutions(rawPokemon: Pokemon) {
-      return (
-        rawPokemon.nextEvolutions?.map(evolution =>
-          find(pokemon, otherPokemon => otherPokemon.num === evolution.num)
-        ) || []
-      )
-    },
-  },
-  Query: {
-    pokemonMany(
-      _,
-      { skip = 0, limit = 999 }: { skip?: number; limit?: number }
-    ): Pokemon[] {
-      return sortBy(pokemon, poke => parseInt(poke.id, 10)).slice(
-        skip,
-        limit + skip
-      )
-    },
-    pokemonOne(_, { id }: { id: string }): Pokemon {
-      return (pokemon as Record<string, Pokemon>)[id]
-    },
-  },
-}
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+app.get('/', (_, res) => {
+  res.send(sortBy(pokemon, poke => parseInt(poke.id, 10)))
 })
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`)
+app.get('/:id', ({ params: { id } }, res) => {
+  if (id && id !== 'undefined') {
+    res.send({
+      ...pokemon[id],
+      prevEvolutions: getEvolutions(pokemon[id].prevEvolutions),
+      nextEvolutions: getEvolutions(pokemon[id].nextEvolutions),
+    })
+  } else res.sendStatus(400)
+})
+
+function getEvolutions(evolutionObjs?: Array<{ num: string; name: string }>) {
+  return (
+    evolutionObjs?.map(evolution =>
+      find(pokemon, otherPokemon => otherPokemon.num === evolution.num)
+    ) || []
+  )
+}
+
+app.listen(3000, () => {
+  console.info('API listening on port 3000')
 })

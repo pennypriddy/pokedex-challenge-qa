@@ -1,78 +1,75 @@
+import axios from 'axios'
 import React from 'react'
-import styled from 'styled-components'
-import { RouteComponentProps, Link } from '@reach/router'
-import { useQuery, gql } from '@apollo/client'
-import { Container as NesContainer } from 'nes-react'
+import audio from './audio'
+import * as S from './styles'
 
-const Container = styled(NesContainer)`
-  && {
-    background: white;
-    margin: 2rem 25%;
+function clickLink() {
+  audio.link.play()
+}
 
-    ::after {
-      z-index: unset;
-      pointer-events: none;
-    }
-  }
-`
+export default function Pokemon() {
+  const [state, setState] = React.useState<{
+    isLoading: boolean
+    hasError: boolean
+    data: Array<{ id: string; name: string; img: string; num: string }>
+  }>({
+    isLoading: true,
+    hasError: false,
+    data: [],
+  })
+  const pokemonList = state.data
 
-const List = styled.ul`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-end;
-`
+  React.useEffect(() => {
+    axios
+      .get('http://localhost:3000')
+      .then(result => {
+        if (result.data) {
+          setState({
+            isLoading: false,
+            hasError: false,
+            data: result.data,
+          })
+        } else {
+          setState({
+            isLoading: false,
+            hasError: true,
+            data: [],
+          })
+          throw new Error('Failed to fetch')
+        }
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }, [])
 
-const ListItem = styled.li`
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-
-  > *:first-child {
-    margin-right: 1rem;
-  }
-`
-
-const POKEMON_MANY = gql`
-  query($skip: Int, $limit: Int) {
-    pokemonMany(skip: $skip, limit: $limit) {
-      id
-      name
-      num
-      img
-    }
-  }
-`
-
-const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
-  clickLink,
-}) => {
-  const { loading, error, data } = useQuery(POKEMON_MANY)
-  const pokemonList:
-    | Array<{ id: string; name: string; img: string; num: string }>
-    | undefined = data?.pokemonMany
-
-  if (loading) {
+  if (state.isLoading) {
     return <p>Loading...</p>
   }
-  if (error || !pokemonList) {
+
+  if (state.hasError || pokemonList.length === 0) {
     return <p>Error!</p>
   }
 
   return (
-    <Container rounded>
-      <List>
+    <S.Container className="nes-container is-rounded">
+      <S.List>
         {pokemonList.map(pokemon => (
-          <Link to={pokemon.id} onMouseDown={clickLink as any}>
-            <ListItem>
-              <img src={pokemon.img} />
-              {pokemon.name} - {pokemon.num}
-            </ListItem>
-          </Link>
+          <S.PokemonLink
+            key={pokemon.id}
+            to={pokemon.id}
+            onMouseDown={clickLink}
+          >
+            <S.ListItem>
+              <S.PokemonImg src={pokemon.img} />
+              <S.PokemonText>
+                <span>{pokemon.name}</span>
+                <span> - {pokemon.num}</span>
+              </S.PokemonText>
+            </S.ListItem>
+          </S.PokemonLink>
         ))}
-      </List>
-    </Container>
+      </S.List>
+    </S.Container>
   )
 }
-
-export default Pokemon

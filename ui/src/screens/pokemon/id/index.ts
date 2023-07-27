@@ -1,1 +1,1 @@
-export { default } from './ID'
+export { default } from './pokemon-id'
