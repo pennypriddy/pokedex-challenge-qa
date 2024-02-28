@@ -67,7 +67,7 @@ export default function Pokedex() {
             </S.Dot>
           </S.Dots>
           <S.RedButtonContainer>
-            <S.RedButton onMouseDown={pressButton} onMouseUp={releaseButton} />
+            <S.RedButton onMouseDown={pressButton} onMouseUp={releaseButton} data-testid="on/off-button" />
             On/Off
           </S.RedButtonContainer>
           <S.Grill>
