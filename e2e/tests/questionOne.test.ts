@@ -7,5 +7,5 @@ test('Should be able to click on link for Charmander and verify weaknesses', asy
   await page.getByTestId('on/off-button').click()
   await page.getByRole('button', { name: 'Click to Start' }).click()
   // Should be able to click on link for Charmander and verify weaknesses
-  //Write your test here
+  //WRITE YOUR TEST HERE
 })
