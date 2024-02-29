@@ -8,7 +8,6 @@
 //   await page.getByTestId('on/off-button').click()
 //   await page.getByRole('button', { name: 'Click to Start' }).click()
 //   // Should be able to click on link for Charmander and verify weaknesses
-//   await page.pause()
 //   await page.getByRole('link', { name: 'Charmander -' }).click()
 //   await expect(
 //     page.getByRole('cell', { name: 'Water, Ground, Rock' })
