@@ -1,7 +1,9 @@
-import React from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
-import audio from './audio'
 import * as S from './styles'
+
+import { Outlet, useLocation } from 'react-router-dom'
+
+import React from 'react'
+import audio from './audio'
 
 function pressButton() {
   audio.buttonPress.play()
