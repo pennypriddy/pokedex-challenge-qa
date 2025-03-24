@@ -30,7 +30,7 @@ _Note: In order to avoid any discrepancies running the dev servers, please make 
    - Unit testing
    - Other kinds of tests (if any)
 
-2. Implement tests for filtering and selecting a pokemon (25 minutes) - Create a test that follows the following happy path
+2. Implement tests for filtering and selecting a pokemon (25 minutes) - Create a test that follows the following happy path. The feature code might need additional test identifiers. 
    1. Filter to only show pokemon who are groound type
    2. Add an additional filter to change the weakness to fighting
    3. Click on Graveler
