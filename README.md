@@ -16,6 +16,27 @@ _Note: In order to avoid any discrepancies running the dev servers, please make 
 
 ## The Tasks
 
+1. Build a test plan (20 minutes)
+- This app is still in its MVP state, but we will be building out more features and would like to make a plan for testing it. The app's current capabilities are
+   - User can view a list of pokemon
+   - A user can filter the list by name, type, and weakness (a pokemon can be 1-2 types and be weak to one or multiple types)
+   - A user can click on a pokemon and see its details including type, weakness, and evolutionary line (the pokemon it evolves from and to) if applicable
+   - A user can click on a pokemon in the evolutionary line and go to the selected pokemon's page
+
+   How should we build out the test plan for this app? Where do we need:
+   - E2E tests
+   - Integration tests
+   - API tests
+   - Unit testing
+   - Other kinds of tests (if any)
+
+2. Implement tests for filtering and selecting a pokemon (25 minutes) - Create a test that follows the following happy path
+   1. Filter to only show pokemon who are groound type
+   2. Add an additional filter to change the weakness to fighting
+   3. Click on Graveler
+   4. Confirm it is a ground type that evolves from Geodude and evolves in to Golem
+
+
 1. Implement Searching on the UI & API
 
 - The user should be able to type in a search query in a search box and get fuzzy matches based on the pokemon name. For example, if a user types in "charzirard" into the search box, the search results should show Charizard, but also Charmander, Charmeleon, and perhaps even others based on fuzzy matching of the text.
