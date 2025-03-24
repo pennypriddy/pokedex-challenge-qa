@@ -36,19 +36,6 @@ _Note: In order to avoid any discrepancies running the dev servers, please make 
    3. Click on Graveler
    4. Confirm it is a ground type that evolves from Geodude and evolves in to Golem
 
-
-1. Implement Searching on the UI & API
-
-- The user should be able to type in a search query in a search box and get fuzzy matches based on the pokemon name. For example, if a user types in "charzirard" into the search box, the search results should show Charizard, but also Charmander, Charmeleon, and perhaps even others based on fuzzy matching of the text.
-- Build out a search box that makes search queries to the API
-- Implement a fuzzy search endpoint in the API. (You can use a pre-made library to solve this, but be ready to defend your decision of which library.)
-
-2. Implement filtering on the UI & API
-
-- The user should be able to filter the list of pokemon by their types and weaknesses. Multiple filters should be able to be applied. Multiple filters should follow the "AND" paradigm vs the "OR" paradigm, meaning additional filters should narrow down results, not expand them. For example, if a user chooses the "FLYING" type and the "FIRE" type, you should filter down the pokemon to only those with **both** the "FLYING" and "FIRE" types. Charizard would show up in this list, but Charmander would not, because it does not have the "FLYING" type. Combining type filters with weakness filters should operate in the same way, narrowing down your search results.
-- Build out filter checkboxes or dropdowns or menus that add filter arguments to your request to the API
-- Implement filtering on the pokemon list endpoint within the API, handling both `types` and `weaknesses` filters
-
 # External Libraries
 
 You are welcome to use external libraries to complete the challenge. However, please be prepared to defend your decisions on which you utilize.
