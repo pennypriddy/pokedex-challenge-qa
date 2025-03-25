@@ -1,4 +1,5 @@
 import * as S from '../styles'
+
 import audio from './audio'
 
 function clickLink() {
@@ -24,6 +25,7 @@ export default function PokemonEvolutions({
 }) {
   return (
     <>
+    <>
       {pokemon.prevEvolutions.length > 0 && (
         <h2 style={{ marginTop: '2rem' }}>Previous Evolutions</h2>
       )}
@@ -43,25 +45,28 @@ export default function PokemonEvolutions({
           <h2>{prevEvolution.name}</h2>
         </S.PokemonLink>
       ))}
-      {pokemon.nextEvolutions.length > 0 && (
-        <h2 style={{ marginTop: '2rem' }}>Next Evolutions</h2>
-      )}
-      {pokemon.nextEvolutions.map(nextEvolution => (
-        <S.PokemonLink
-          onMouseDown={clickLink}
-          style={{
-            width: 'unset',
-            display: 'inline-flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginRight: '1rem',
-          }}
-          to={`/pokemon/${nextEvolution.id}`}
-        >
-          <img src={nextEvolution.img} />
-          <h2>{nextEvolution.name}</h2>
-        </S.PokemonLink>
-      ))}
+      </>
+      <>
+        {pokemon.nextEvolutions.length > 0 && (
+          <h2 style={{ marginTop: '2rem' }}>Next Evolutions</h2>
+        )}
+        {pokemon.nextEvolutions.map(nextEvolution => (
+          <S.PokemonLink
+            onMouseDown={clickLink}
+            style={{
+              width: 'unset',
+              display: 'inline-flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginRight: '1rem',
+            }}
+            to={`/pokemon/${nextEvolution.id}`}
+          >
+            <img src={nextEvolution.img} />
+            <h2>{nextEvolution.name}</h2>
+          </S.PokemonLink>
+        ))}
+       </>
     </>
   )
 }

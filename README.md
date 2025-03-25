@@ -36,6 +36,8 @@ _Note: In order to avoid any discrepancies running the dev servers, please make 
    3. Click on Graveler
    4. Confirm it is a ground type that evolves from Geodude and evolves in to Golem
 
+Note: This test is set up for playwright. You are free to use whichever test framework you like, but using another framework will take some of the 20 minutes available for this exercise, so if you'd like to do that, it might be better to use pseudocode.
+
 # External Libraries
 
 You are welcome to use external libraries to complete the challenge. However, please be prepared to defend your decisions on which you utilize.
