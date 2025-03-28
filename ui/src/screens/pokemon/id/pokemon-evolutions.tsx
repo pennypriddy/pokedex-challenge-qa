@@ -25,7 +25,7 @@ export default function PokemonEvolutions({
 }) {
   return (
     <>
-    <>
+    <div id="previousEvolutions">
       {pokemon.prevEvolutions.length > 0 && (
         <h2 style={{ marginTop: '2rem' }}>Previous Evolutions</h2>
       )}
@@ -45,8 +45,8 @@ export default function PokemonEvolutions({
           <h2>{prevEvolution.name}</h2>
         </S.PokemonLink>
       ))}
-      </>
-      <>
+      </div>
+      <div id="nextEvolutions">
         {pokemon.nextEvolutions.length > 0 && (
           <h2 style={{ marginTop: '2rem' }}>Next Evolutions</h2>
         )}
@@ -66,7 +66,7 @@ export default function PokemonEvolutions({
             <h2>{nextEvolution.name}</h2>
           </S.PokemonLink>
         ))}
-       </>
+       </div>
     </>
   )
 }

@@ -11,7 +11,7 @@ function clickLink() {
 export default function Pokemon() {
   const pokemon = trpc.pokemonList.useQuery()
   const [filterText, setFilterText] = useState('')
-  const [filterType, setFilterType] = useState('Grass')
+  const [filterType, setFilterType] = useState('')
   const [filterWeakness, setFilterWeakness] = useState('')
   const typeArray = [
     '',
