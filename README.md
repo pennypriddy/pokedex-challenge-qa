@@ -17,13 +17,13 @@ _Note: In order to avoid any discrepancies running the dev servers, please make 
 ## The Tasks
 
 1. Build a test plan (20 minutes)
-- This app is still in its MVP state, but we will be building out more features and would like to make a plan for testing it. The app's current capabilities are
+- This app is still in its MVP state. We would like to make a plan for testing it. The app's current capabilities are
    - User can view a list of pokemon
    - A user can filter the list by name, type, and weakness (a pokemon can be 1-2 types and be weak to one or multiple types)
    - A user can click on a pokemon and see its details including type, weakness, and evolutionary line (the pokemon it evolves from and to) if applicable
    - A user can click on a pokemon in the evolutionary line and go to the selected pokemon's page
 
-   How should we build out the test plan for this app? Where do we need:
+   How should we build out the test plan for this app? Please ask any questions that will help you make decisions and consider:
    - E2E tests
    - Integration tests
    - API tests
